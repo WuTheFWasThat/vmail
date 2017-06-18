@@ -122,6 +122,15 @@ format string. Make sure you enclose these in quotes:
     date_format: '%b %d %I:%M%P'
     date_format_previous_years: '%b %d %Y'
 
+## Vim Configuration
+
+With vmail, the environment variable IS_VMAIL should be set.  
+So, in your vimrc, you can detect it:
+    
+    if !empty($IS_VMAIL)
+      nmap <buffer> r <Plug>VmailMessageWindow_Reply
+    endif
+
 ## Contacts autocompletion
 
 Vmail uses Vim autocompletion to help you auto-complete email addresses.

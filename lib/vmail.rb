@@ -153,6 +153,7 @@ module Vmail
 
     vim_options = {
       'DRB_URI' => $drb_uri,
+      'IS_VMAIL' => "true",
       'VMAIL_CONTACTS_FILE' => contacts_file,
       'VMAIL_MAILBOX' => String.shellescape(mailbox),
       'VMAIL_QUERY' => %("#{ query_string }")

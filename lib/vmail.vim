@@ -50,7 +50,7 @@ function! s:create_list_window()
   setlocal nomodifiable
   setlocal noswapfile
   setlocal nowrap
-  setlocal nonumber
+  " setlocal nonumber
   setlocal foldcolumn=0
   setlocal nospell
   setlocal textwidth=0
@@ -69,7 +69,7 @@ endfunction
 
 " the message display buffer window
 function! s:create_message_window()
-  exec "split " . s:message_bufname
+  exec "vsplit " . s:message_bufname
   setlocal modifiable
   setlocal buftype=nofile
   let s:message_window_bufnr = bufnr('%')
@@ -208,7 +208,7 @@ function! s:focus_list_window()
   let winnr = bufwinnr(s:listbufnr)
   if winnr == -1
     " create window
-    split
+    vsplit
     exec "buffer" . s:listbufnr
   else
     exec winnr . "wincmd w"
@@ -223,7 +223,7 @@ function! s:focus_message_window()
   let winnr = bufwinnr(s:message_window_bufnr)
   if winnr == -1
     " create window
-    exec "rightbelow split " . s:message_bufname
+    exec "rightbelow vsplit " . s:message_bufname
   else
     exec winnr . "wincmd w"
   endif
@@ -627,7 +627,7 @@ func! s:open_compose_window(command)
   let res = s:system_with_error_handling(a:command)
   let previous_winnr = winnr()
   only
-  split compose_message.txt
+  vsplit compose_message.txt
   setlocal modifiable
   wincmd p
   close!
@@ -1173,9 +1173,6 @@ func! s:set_list_colors()
   syn match VmailBufferFlagged /^*.*/hs=s
   exec "hi def VmailBufferFlagged " . g:vmail_flagged_color
 endfunc
-
-"TODO see if using LocalLeader and maplocalleader makes more sense
-let mapleader = ","
 
 call s:global_mappings()
 
