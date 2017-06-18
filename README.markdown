@@ -128,7 +128,9 @@ With vmail, the environment variable IS_VMAIL should be set.
 So, in your vimrc, you can detect it:
     
     if !empty($IS_VMAIL)
-      nmap <buffer> r <Plug>VmailMessageWindow_Reply
+      autocmd FileType vmailMessageList nmap <buffer> * <Plug>VmailToggleStar
+      autocmd FileType vmailMessageList xmap <buffer> * <Plug>VmailToggleStar
+      autocmd FileType mail nmap <buffer> * <Plug>VmailMessageWindow_ToggleStar
     endif
 
 ## Contacts autocompletion

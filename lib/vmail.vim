@@ -883,12 +883,6 @@ func! s:message_window_mappings()
   endif
   nnoremap <buffer> <unique> <script> <Plug>VmailMessageWindow_OpenHTML :call <SID>open_html_part()<CR>
 
-  if !hasmapto('<Plug>VmailMessageWindow_CloseWindow')
-    nmap <buffer> <leader>q <Plug>VmailMessageWindow_CloseWindow
-    nmap <buffer> o <Plug>VmailMessageWindow_CloseWindow
-  endif
-  nnoremap <buffer> <unique> <script> <Plug>VmailMessageWindow_CloseWindow :call <SID>close_message_window()<CR>
-
   if !hasmapto('<Plug>VmailMessageWindow_DeleteMessage')
     nmap <buffer> <leader># <Plug>VmailMessageWindow_DeleteMessage
     nmap <buffer> <leader>3 <Plug>VmailMessageWindow_DeleteMessage
@@ -980,11 +974,6 @@ func! s:message_list_window_mappings()
     nmap <buffer> l <Plug>VmailPreviewMessage
   endif
   nnoremap <buffer> <unique> <script> <Plug>VmailPreviewMessage :call <SID>show_message(1)<CR>
-
-  if !hasmapto('<Plug>VmailExit')
-    nmap <buffer> <leader>q <Plug>VmailExit
-  endif
-  nnoremap <buffer> <unique> <script> <Plug>VmailExit :qall!<CR>
 
   if !hasmapto('<Plug>VmailToggleStar')
     nmap <buffer> <leader>* <Plug>VmailToggleStar
@@ -1119,16 +1108,6 @@ func! s:compose_window_mappings()
   command! -bar -nargs=1 -complete=file VMAttach call s:attach_file(<f-args>)
 endfunc
 
-func! s:global_mappings()
-  " NOTE send_message is a global mapping, so user can load a saved
-  " message from a file and send it
-  nnoremap <silent> <leader>vs :call <SID>send_message()<CR>
-  noremap <silent> <leader>o :call <SID>open_href(0)<cr>
-  noremap <silent> <leader>O :call <SID>open_href(1)<cr>
-  noremap <silent> <leader>? :call <SID>show_help()<cr>
-  noremap <silent> <leader>qq :qal!<cr>
-endfunc
-
 func! s:set_list_colors()
   if !exists("g:syntax_on")
     return
@@ -1173,8 +1152,6 @@ func! s:set_list_colors()
   syn match VmailBufferFlagged /^*.*/hs=s
   exec "hi def VmailBufferFlagged " . g:vmail_flagged_color
 endfunc
-
-call s:global_mappings()
 
 call s:create_list_window()
 
